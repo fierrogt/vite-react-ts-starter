@@ -1,74 +1,38 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { useState } from 'react';
-import { css, jsx } from '@emotion/react';
-import styled from '@emotion/styled';
-import { Button } from '@mui/material';
+import { jsx } from '@emotion/react';
 
-import { useGetProjectsQuery } from '@/service/api';
+import HomePage from '@/pages/HomePage';
+import DeviceSelectionPage from '@/pages/DeviceSelectionPage';
+import SpecsSearchPage from '@/pages/SpecsSearchPage';
+import ResultsPage from '@/pages/ResultsPage';
 
-const AppContainer = styled('div')`
-  text-align: center;
-`;
+export default function App() {
+  const [page, setPage] = useState<'home' | 'device' | 'specs' | 'results'>('home');
+  const [selectedDevices, setSelectedDevices] = useState<string[]>([]);
+  const [selectedSpecs, setSelectedSpecs] = useState<{ protocol: string; length: string } | undefined>();
 
-const AppHeader = styled('header')`
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-`;
+  const showHome = () => setPage('home');
+  const handleDevices = (devices: string[]) => {
+    setSelectedDevices(devices);
+    setSelectedSpecs(undefined);
+    setPage('results');
+  };
+  const handleSpecs = (specs: { protocol: string; length: string }) => {
+    setSelectedDevices([]);
+    setSelectedSpecs(specs);
+    setPage('results');
+  };
 
-function App() {
-  const [count, setCount] = useState(0);
-  const { data, isFetching, isError, isSuccess, refetch } = useGetProjectsQuery();
-
-  return (
-    <AppContainer>
-      <AppHeader>
-        <p
-          css={css`
-            color: yellow;
-          `}
-        >
-          Hello Vite + React!
-        </p>
-        <div>
-          <p>
-            {isFetching
-              ? 'Fetching projects...'
-              : isError
-              ? 'Error fetching projects!'
-              : isSuccess
-              ? 'Successfully fetched projects!'
-              : ''}
-          </p>
-        </div>
-        <div
-          css={css`
-            opacity: ${isFetching ? 0.5 : 1};
-          `}
-        >
-          Projects: {JSON.stringify(data)}
-        </div>
-        <Button variant="contained" color="primary" onClick={refetch}>
-          Re-fetch projects
-        </Button>
-        <p>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => setCount((count) => count + 1)}
-          >
-            count is: {count}
-          </Button>
-        </p>
-      </AppHeader>
-    </AppContainer>
-  );
+  if (page === 'device') {
+    return <DeviceSelectionPage onSubmit={handleDevices} />;
+  }
+  if (page === 'specs') {
+    return <SpecsSearchPage onSubmit={handleSpecs} />;
+  }
+  if (page === 'results') {
+    return <ResultsPage devices={selectedDevices} specs={selectedSpecs} onBack={showHome} />;
+  }
+  return <HomePage onSelectDevices={() => setPage('device')} onSpecSearch={() => setPage('specs')} />;
 }
-
-export default App;
