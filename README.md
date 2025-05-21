@@ -1,19 +1,19 @@
-# Vite/React/Typescript Starter
+# Vite/React/Typescript Starter (React 19 / Vite 6)
 
 A starter repository with the following libraries set up and included:
 
-- Vite
-- React
+- Vite 6
+- React 19
 - Typescript
 - Eslint
 - Prettier
 - @emotion/react
 - @emotion/styled
-- msw
+- miragejs
 - @reduxjs/toolkit
 - react-redux
-- @mui/material
-- notistack
+- @mui/material 7.1.0
+- notistack 3.x
 - vitest
 - @testing-library/react
 

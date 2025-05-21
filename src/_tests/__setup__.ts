@@ -1,19 +1,15 @@
-import { setupServer } from 'msw/node';
-import { beforeAll, afterEach, afterAll } from 'vitest';
+import { beforeEach, afterEach } from 'vitest';
+import { makeServer } from '@/_mocks/server';
+import type { Server } from 'miragejs';
 
 import '@/_mocks/fetchPolyfill';
 
-// leave registering handlers up to individual tests
-export const mswTestServer = setupServer();
+let server: Server;
 
-beforeAll(() => {
-  mswTestServer.listen();
+beforeEach(() => {
+  server = makeServer({ environment: 'test' });
 });
 
 afterEach(() => {
-  mswTestServer.resetHandlers();
-});
-
-afterAll(() => {
-  mswTestServer.close();
+  server.shutdown();
 });
