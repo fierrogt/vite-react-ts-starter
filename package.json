@@ -15,7 +15,7 @@
     "@emotion/styled": "^11.8.1",
     "@mui/material": "7.1.0",
     "@reduxjs/toolkit": "^1.8.1",
-    "@stordco/msw-toolbar": "^0.2.1",
+    "miragejs": "^0.1.45",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^6.0.0",
@@ -41,14 +41,11 @@
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.5.0",
     "jsdom": "^19.0.0",
-    "msw": "^0.41.0",
     "node-fetch": "^2.6.6",
     "prettier": "^2.6.2",
     "typescript": "^4.6.4",
     "vite": "^6.0.0",
     "vitest": "^0.12.9"
-  },
-  "msw": {
-    "workerDirectory": "public"
   }
+
 }
