@@ -13,15 +13,15 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
-    "@mui/material": "^5.8.0",
+    "@mui/material": "7.1.0",
     "@reduxjs/toolkit": "^1.8.1",
-    "@stordco/msw-toolbar": "^0.2.1",
-    "@types/react": "^18.0.9",
-    "@types/react-dom": "^18.0.4",
-    "@vitejs/plugin-react": "^1.3.2",
+    "miragejs": "^0.1.45",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^6.0.0",
     "notistack": "^2.0.5",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "react-redux": "^8.0.1"
   },
   "devDependencies": {
@@ -41,14 +41,11 @@
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.5.0",
     "jsdom": "^19.0.0",
-    "msw": "^0.41.0",
     "node-fetch": "^2.6.6",
     "prettier": "^2.6.2",
     "typescript": "^4.6.4",
-    "vite": "^2.7.7",
+    "vite": "^6.0.0",
     "vitest": "^0.12.9"
-  },
-  "msw": {
-    "workerDirectory": "public"
   }
+
 }

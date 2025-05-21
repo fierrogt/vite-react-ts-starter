@@ -1,7 +1,3 @@
-import { setupWorker } from 'msw';
+import { makeServer } from './server';
 
-import { createHandlers } from './handlers';
-
-export const getWorker = () => {
-  return setupWorker(...createHandlers());
-};
+export const startMockServer = () => makeServer({ environment: 'development' });

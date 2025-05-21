@@ -4,8 +4,7 @@ import { jsx } from '@emotion/react';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { MSWToolbar } from '@stordco/msw-toolbar';
-import { SetupWorkerApi } from 'msw';
+import { startMockServer } from '@/_mocks/browser';
 
 import { store } from '@/store';
 import MessageAlertProvider from '@/features/messageAlert/MessageAlertProvider';
@@ -15,14 +14,9 @@ import { GlobalStyles } from './GlobalStyles';
 
 const isDev = process.env.NODE_ENV === 'development';
 
-let worker: SetupWorkerApi;
-const prepareWorker = async () => {
-  if (isDev) {
-    const { getWorker } = await import('@/_mocks/browser');
-    worker = getWorker();
-    return worker;
-  }
-};
+if (isDev) {
+  startMockServer();
+}
 
 const renderApp = () => {
   const container = document.getElementById('root');
@@ -32,17 +26,15 @@ const renderApp = () => {
   const root = createRoot(container);
   root.render(
     <StrictMode>
-      <MSWToolbar worker={worker} apiUrl={`${window.location.origin}/api/`} isEnabled={isDev}>
-        <Provider store={store}>
-          <MessageAlertProvider>
-            <GlobalStyles>
-              <App />
-            </GlobalStyles>
-          </MessageAlertProvider>
-        </Provider>
-      </MSWToolbar>
+      <Provider store={store}>
+        <MessageAlertProvider>
+          <GlobalStyles>
+            <App />
+          </GlobalStyles>
+        </MessageAlertProvider>
+      </Provider>
     </StrictMode>
   );
 };
 
-prepareWorker().then(renderApp);
+renderApp();
